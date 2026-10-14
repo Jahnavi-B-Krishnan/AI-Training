@@ -190,7 +190,7 @@
 -- SELECT  TOP 1 c.booking_amount, c.hotel_name FROM c 
 -- ORDER BY c.booking_amount DESC
 
--- SELECT TOP 1 AVG(c.room_rate), c.room_type FROM c 
+-- SELECT AVG(c.room_rate), c.room_type FROM c 
 -- GROUP BY c.room_type 
 
 SELECT SUM(c.booking_amount) FROM c
