@@ -1,1 +1,204 @@
 
+-- SELECT * FROM c
+
+-- SELECT c.station_name, c.city, c.status
+-- FROM c
+
+-- SELECT c.station_name, c.capacity_kw, c.daily_sessions, c.revenue
+-- FROM c
+
+-- SELECT c.id, c.station_name
+-- From c
+
+-- SELECT * 
+-- FROM c
+-- WHERE c.city = "Hyderabad"
+
+-- SELECT * 
+-- FROM c
+-- WHERE c.city = "Mumbai"
+
+-- SELECT * 
+-- FROM c
+-- WHERE c.status = "Maintenance"
+
+-- SELECT * 
+-- FROM c
+-- WHERE c.station_type = "Fast"
+
+-- SELECT * 
+-- FROM c
+-- WHERE c.connector_type = "CCS2"
+
+-- Select * FROM c
+-- WHERE c.capacity_kw >100
+
+-- SELECT * FROM c
+-- WHERE c.revenue > 15000
+
+-- Select * From c
+-- WHERE c.daily_sessions >40
+
+-- SELECT * FROM c 
+-- WHERE c.uptime_percent < 96
+
+-- SELECT * FROM c 
+-- WHERE  c.capacity_kw BETWEEN 50 AND 120
+
+-- SELECT * FROM c
+-- WHERE c.revenue < 10000
+
+-- Select * FROM c
+-- WHERE c.station_type = "Fast" AND c.status ="Active"
+
+-- Select * FROM c
+-- WHERE c.city = "Hyderabad" AND c.revenue > 10000
+
+-- Select * FROM c
+-- WHERE c.capacity_kw > 100 AND c.daily_sessions > 40
+
+-- Select * FROM c
+-- WHERE c.uptime_percent >97 AND c.status ="Active"
+
+-- Select * FROM c
+-- WHERE c.station_type = "Standard" AND c.revenue < 10000
+
+-- Select * FROM c
+-- WHERE c.city = "Hyderabad" OR c.city ="Bengaluru"
+
+-- Select * FROM c
+-- WHERE c.zone = "North" OR c.zone ="South"
+
+-- Select * FROM c
+-- WHERE c.station_type = "Fast" OR c.revenue < 20000
+
+-- Select * FROM c
+-- WHERE c.city = "Mumbai" OR c.city ="Delhi" OR c.city ="Chennai"
+
+-- SELECT * FROM c 
+-- ORDER BY c.revenue 
+
+-- SELECT * FROM c 
+-- ORDER BY c.revenue DESC
+
+-- SELECT * FROM c 
+-- ORDER BY c.daily_sessions DESC 
+
+-- SELECT * FROM c 
+-- ORDER BY c.uptime_percent 
+
+-- SELECT * FROM c 
+-- ORDER BY c.city ASC, c.revenue DESC
+
+-- SELECT COUNT(c.station_name)
+-- FROM c 
+
+-- SELECT COUNT(c.status ) 
+-- FROM c
+-- WHERE c.status = "Active"
+
+-- SELECT COUNT(c.station_type ) 
+-- FROM c
+-- WHERE c.station_type = "Fast"
+
+-- SELECT COUNT(c.city ) 
+-- FROM c
+-- WHERE c.city = "Pune"
+
+-- SELECT COUNT(c.revenue ) 
+-- FROM c
+-- WHERE c.revenue > 15000
+
+-- SELECT c.city, COUNT(c.city) FROM c 
+-- GROUP BY c.city
+
+-- SELECT c.station_type, COUNT(c.station_type) FROM c 
+-- GROUP BY c.station_type
+
+-- SELECT c.status, COUNT(c.city) FROM c 
+-- GROUP BY c.status
+
+-- SELECT c.city, SUM(c.revenue) FROM c 
+-- GROUP BY c.city
+
+-- SELECT c.station_type, AVG(c.revenue) FROM c 
+-- GROUP BY c.station_type
+
+-- SELECT c.city, AVG(c.uptime_percent) FROM c 
+-- GROUP BY c.city
+
+-- SELECT c.city, SUM(c.daily_sessions) FROM c 
+-- GROUP BY c.city
+
+-- SELECT c.station_type, AVG(c.capacity_kw) FROM c 
+-- GROUP BY c.station_type
+
+-- SELECT c.city, SUM(c.revenue) FROM c 
+-- WHERE c.status = "Active"
+-- GROUP BY c.city
+
+-- SELECT c.city, COUNT(c.station_type) FROM c 
+-- WHERE c.station_type = "Fast"
+-- GROUP BY c.city
+
+-- SELECT c.city, AVG(c.revenue) FROM c 
+-- WHERE c.revenue > 8000
+-- GROUP BY c.city
+
+-- SELECT c.station_type, SUM(c.daily_sessions) FROM c 
+-- GROUP BY c.station_type
+
+-- SELECT TOP 5 c.station_name, c.revenue FROM c
+-- ORDER BY c.revenue DESC
+
+-- SELECT TOP 3 c.station_name, c.daily_sessions FROM c
+-- ORDER BY c.daily_sessions DESC
+
+-- SELECT * FROM c
+-- WHERE c.status = "Active" AND c.station_type = "Fast"
+-- Order BY c.revenue DESC
+
+-- SELECT * FROM c
+-- WHERE c.revenue > 12000 AND c.uptime_percent > 97
+-- ORDER BY c.revenue DESC
+
+-- SELECT * FROM c 
+-- WHERE c.city ="Hyderabad" OR c.city="Bengaluru" AND c.daily_sessions > 30
+
+-- SELECT * FROM c 
+-- WHERE c.status ="Maintenance"
+-- ORDER BY c.uptime_percent 
+
+-- SELECT c.station_name,c.city, c.revenue, c.uptime_percent FROM c 
+-- WHERE c.revenue > 15000
+
+-- SELECT * FROM c 
+-- WHERE c.station_type="Fast" AND c.capacity_kw >=120
+-- ORDER BY c.capacity_kw DESC
+
+-- SELECT c.city, SUM(c.revenue)FROM c 
+-- GROUP BY c.city
+
+-- SELECT TOP 1 c.revenue, c.station_name FROM c
+-- ORDER BY c.revenue DESC
+
+
+-- SELECT TOP 1 c.uptime_percent FROM c
+-- ORDER BY c.uptime_percent 
+
+-- SELECT TOP 1 AVG(c.revenue), c.station_type FROM c
+-- GROUP BY c.station_type
+
+-- SELECT TOP 1 SUM(c.daily_sessions), c.city FROM c 
+-- GROUP BY c.city
+
+SELECT COUNT(c.station_name) FROM c 
+WHERE c.status ="Maintenance"
+
+
+
+
+
+
+
+
