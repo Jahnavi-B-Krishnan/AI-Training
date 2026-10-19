@@ -1,0 +1,173 @@
+
+-- SELECT * FROM vehicles;
+
+-- SELECT * FROM service_bookings
+-- WHERE service_status ='Scheduled';
+
+-- SELECT * FROM service_items
+-- WHERE cost > 1500;
+
+-- SELECT * FROM technicians
+-- WHERE specialization = 'Battery' OR specialization ='Electrical';
+
+-- SELECT customer_id, COUNT(*) AS total_vehicles
+-- FROM vehicles
+-- GROUP BY customer_id;
+
+-- SELECT AVG(cost) FROM service_items;
+
+-- SELECT c.customer_name,
+-- 	v.model_name,
+-- 	v.registration_no
+-- FROM customers c
+-- JOIN vehicles v
+--  ON c.customer_id = v.customer_id;
+
+-- SELECT v.vehicle_id,v.model_name,sb.service_date,sb.service_status
+-- FROM vehicles v 
+-- JOIN service_bookings sb 
+--  ON v.vehicle_id=sb.vehicle_id;
+-- SELECT sb.booking_id,t.technician_name,t.specialization,sb.service_status FROM service_bookings sb JOIN 
+-- technicians t ON sb.technician_id=t.technician_id;
+
+-- SELECT c.customer_name,v.model_name,t.technician_name,sb.service_date,sb.service_status
+-- FROM customers c
+-- JOIN vehicles v
+-- ON c.customer_id=v.customer_id
+-- JOIN service_bookings sb
+-- ON v.vehicle_id=sb.vehicle_id
+-- JOIN technicians t
+-- ON sb.technician_id=t.technician_id;
+
+-- SELECT sb.booking_id,SUM(s.cost) 
+-- FROM service_bookings sb 
+-- JOIN service_items s
+-- ON sb.booking_id=s.booking_id
+-- GROUP BY sb.booking_id;
+
+-- SELECT c.customer_id,c.customer_name,v.model_name,sb.booking_id
+-- FROM customers c
+-- LEFT JOIN vehicles v
+-- ON c.customer_id=v.customer_id
+-- LEFT JOIN service_bookings sb
+-- ON v.vehicle_id=sb.vehicle_id;
+
+-- CREATE VIEW service_booking_summary AS
+-- SELECT sb.booking_id,c.customer_name,v.model_name,t.technician_name,sb.service_date,sb.service_status
+-- FROM customers c
+-- JOIN vehicles v
+-- ON c.customer_id=v.customer_id
+-- JOIN service_bookings sb
+-- ON v.vehicle_id=sb.vehicle_id
+-- JOIN technicians t
+-- ON sb.technician_id=t.technician_id;
+
+
+
+
+-- SELECT  * FROM service_booking_summary WHERE service_status='Completed';
+
+-- CREATE VIEW service_cost_summary AS
+-- SELECT sb.booking_id,c.customer_name,SUM(s.cost) AS total_service_cost
+-- FROM customers c
+-- JOIN vehicles v
+-- ON c.customer_id=v.customer_id
+-- JOIN service_bookings sb
+-- ON v.vehicle_id=sb.vehicle_id
+-- JOIN service_items s
+-- ON sb.booking_id=s.booking_id
+-- GROUP BY sb.booking_id,c.customer_name;
+
+-- SELECT * FROM service_cost_summary;
+
+-- CREATE OR REPLACE FUNCTION calculate_service_discount(cost DECIMAL)
+-- RETURNS DECIMAL
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- 	IF cost>=2500 THEN
+-- 		RETURN cost *0.10;
+-- 	ELSE
+-- 		RETURN 0;
+-- 	END IF;
+-- END;
+-- $$ ;
+
+-- CREATE OR REPLACE FUNCTION calculate_final_cost(cost DECIMAL)
+-- RETURNS DECIMAL
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- 	RETURN cost-calculate_service_discount(cost);
+-- END;
+-- $$;
+
+-- SELECT calculate_final_cost(2000);
+
+-- CREATE OR REPLACE PROCEDURE update_service_status(
+-- 	p_booking_id INT,
+-- 	p_new_status VARCHAR)
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- 	UPDATE service_bookings
+-- 	set service_status=p_new_status
+-- 	WHERE booking_id=p_booking_id;
+-- END;
+-- $$;
+
+-- CALL update_service_status(1004,'C')
+
+-- CREATE OR REPLACE PROCEDURE complete_old_services()
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- UPDATE  service_bookings
+-- SET service_status='Completed'
+-- WHERE service_status='In Progress';
+-- END;
+-- $$;
+
+-- -- CALL complete_old_services()
+
+-- SELECT * FROM  service_bookings WHERE service_status='Completed';
+
+
+-- CREATE OR REPLACE PROCEDURE assign_technician(
+-- p_booking_id INT,
+-- p_technician_id INT
+-- )
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- UPDATE service_bookings
+-- SET technician_id = p_technician_id
+-- WHERE booking_id = p_booking_id;
+-- END;
+-- $$;
+-- CALL assign_technician(1001,202);
+-- SELECT * FROM service
+
+CREATE OR REPLACE PROCEDURE increase_service_cost(
+    p_percentage NUMERIC
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE service_items
+    SET cost = cost * (1 + p_percentage / 100.0);
+END;
+$$;
+
+CALL increase_service_cost(10);
+
+SELECT
+    service_item_id,
+    service_name,
+    cost
+FROM service_items;
+
+
+
+
+
