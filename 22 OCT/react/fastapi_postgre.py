@@ -1,0 +1,150 @@
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+
+app = FastAPI()
+
+
+# Enable CORS for React/Vite
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# Product model
+class Product(BaseModel):
+    id: int
+    name: str
+    price: float
+    image: str
+
+
+# In-memory product data
+import psycopg2
+
+def get_connection():
+    return psycopg2.connect(
+        host="localhost",
+        database="product_store",
+        user="postgres",
+        password="Admin@123"
+)
+
+
+# Home endpoint
+@app.get("/")
+def home():
+    return {
+        "message": "Product API is running"
+    }
+
+
+# GET all products
+@app.get("/products")
+def get_products():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT id, name, price, image
+    FROM products
+    ORDER BY id
+    """)
+    rows = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    products = []
+    for row in rows:
+        products.append({
+        "id": row[0],
+        "name": row[1],
+        "price": float(row[2]),
+        "image": row[3]
+        })
+    return products
+
+
+# GET product by ID
+# @app.get("/products/{product_id}")
+# def get_product(product_id: int):
+#
+#     for product in products:
+#         if product["id"] == product_id:
+#             return product
+#
+#     raise HTTPException(
+#         status_code=404,
+#         detail="Product not found"
+#     )
+#
+#
+# # POST - Add product
+# @app.post("/products")
+# def add_product(product: Product):
+#
+#     for existing_product in products:
+#         if existing_product["id"] == product.id:
+#             raise HTTPException(
+#                 status_code=400,
+#                 detail="Product ID already exists"
+#             )
+#
+#     products.append(product.model_dump())
+#
+#     return {
+#         "message": "Product added successfully",
+#         "product": product
+#     }
+#
+#
+# # PUT - Update product
+# @app.put("/products/{product_id}")
+# def update_product(
+#     product_id: int,
+#     updated_product: Product
+# ):
+#
+#     for index, product in enumerate(products):
+#
+#         if product["id"] == product_id:
+#
+#             products[index] = updated_product.model_dump()
+#
+#             return {
+#                 "message": "Product updated successfully",
+#                 "product": updated_product
+#             }
+#
+#     raise HTTPException(
+#         status_code=404,
+#         detail="Product not found"
+#     )
+#
+#
+# # DELETE - Delete product
+# @app.delete("/products/{product_id}")
+# def delete_product(product_id: int):
+#
+#     for index, product in enumerate(products):
+#
+#         if product["id"] == product_id:
+#
+#             deleted_product = products.pop(index)
+#
+#             return {
+#                 "message": "Product deleted successfully",
+#                 "product": deleted_product
+#             }
+#
+#     raise HTTPException(
+#         status_code=404,
+#         detail="Product not found"
+#     )
