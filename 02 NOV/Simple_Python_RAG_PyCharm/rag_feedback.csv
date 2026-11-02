@@ -1,0 +1,11 @@
+timestamp,model,question,answer,retrieved_chunk_ids,best_distance,total_seconds,feedback
+2026-11-02T15:36:35,openai/gpt-oss-20b,How much annual leave do employees receive?,Full‑time employees receive **18 days of paid annual leave per calendar year**【chunk_003】.,"chunk_003, chunk_002, chunk_001",0.4299,2.33,Not rated
+2026-11-02T16:05:13,nvidia/nemotron-3.5-super-vl:free,How many annual leave days do full-time employees receive?,Full-time employees receive 18 days of paid annual leave per calendar year [chunk_003].,"chunk_003, chunk_002, chunk_001",0.3442,9.49,Correct
+2026-11-02T16:05:46,nvidia/nemotron-3.5-lightning:free,Which days are mandatory office days?,The reference text states that employees eligible for hybrid work are expected to work from the office on Tuesdays and Thursdays. [chunk_002],"chunk_002, chunk_003, chunk_005",0.5461,13.98,Correct
+2026-11-02T16:06:19,dots-studio/dots-3-note-preview:free,How many paid sick leave days are provided?,"
+
+Based on the document, employees receive eight days of paid sick leave per calendar year [chunk_003].","chunk_003, chunk_004, chunk_002",0.238,5.27,Correct
+2026-11-02T16:06:42,cohere/north-mini-code:free,When must a lost laptop be reported?,A lost or stolen company laptop must be reported to IT and the security team within 24 hours of discovery [chunk_006].,"chunk_006, chunk_007, chunk_005",0.3702,20.05,Not rated
+2026-11-02T16:07:03,dots-studio/dots-3-note-preview:free,What is the response target for a Priority 1 incident?,"
+
+Based on the document, the response target for a Priority 1 incident is an initial response within 30 minutes [chunk_005].","chunk_005, chunk_004, chunk_006",0.5002,5.89,Correct
