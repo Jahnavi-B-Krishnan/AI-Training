@@ -1,0 +1,28 @@
+
+# Python temporary files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# React dependencies and builds
+node_modules/
+dist/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Duplicate local copies in 05 NOV
+05 NOV/backend/
+05 NOV/frontend/
+
